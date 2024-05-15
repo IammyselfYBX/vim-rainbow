@@ -58,3 +58,6 @@ let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
 :RainbowToggle  --打开/关闭 Rainbow 插件
 :RainbowLoad    --加载/重新加载 Rainbow 插件
 ```
+
+# 演示
+![Rainbow演示](./rainbow-demo.gif)
