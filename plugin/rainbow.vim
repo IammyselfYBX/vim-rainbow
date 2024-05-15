@@ -7,12 +7,17 @@
 
 " 默认使用从gruvbox配色方案复制的彩虹色（https://github.com/morhetz/gruvbox）。
 " 这些颜色通常适用于浅色和深色的配色方案。
+"   '#458588', " 深蓝绿色
+"   '#b16286', " 浅红色
+"   '#cc241d', " 深红色
+"   '#d65d0e', " 橙色
+"   '#458588', " 重复的颜色，以此类推
 let s:guifgs = exists('g:rainbow_guifgs')? g:rainbow_guifgs : [
-            \ '#458588', " 深蓝绿色
-            \ '#b16286', " 浅红色
-            \ '#cc241d', " 深红色
-            \ '#d65d0e', " 橙色
-            \ '#458588', " 重复的颜色，以此类推
+            \ '#458588', 
+            \ '#b16286', 
+            \ '#cc241d', 
+            \ '#d65d0e', 
+            \ '#458588', 
             \ '#b16286',
             \ '#cc241d',
             \ '#d65d0e',
@@ -27,15 +32,23 @@ let s:guifgs = exists('g:rainbow_guifgs')? g:rainbow_guifgs : [
             \ ]
 
 " 控制台颜色设置，用于不支持 GUI 的环境。
+"   'brown',        " 棕色
+"   'Darkblue',     " 深蓝色
+"   'darkgray',     " 深灰色
+"   'darkgreen',    " 深绿色
+"   'darkcyan',     " 深青色
+"   'darkred',      " 深红色
+"   'darkmagenta',  " 深洋红色
+"   'brown',        " 重复的颜色，以此类推
 let s:ctermfgs = exists('g:rainbow_ctermfgs')? g:rainbow_ctermfgs : [
-            \ 'brown',        " 棕色
-            \ 'Darkblue',     " 深蓝色
-            \ 'darkgray',     " 深灰色
-            \ 'darkgreen',    " 深绿色
-            \ 'darkcyan',     " 深青色
-            \ 'darkred',      " 深红色
-            \ 'darkmagenta',  " 深洋红色
-            \ 'brown',        " 重复的颜色，以此类推
+            \ 'brown',        
+            \ 'Darkblue',     
+            \ 'darkgray',     
+            \ 'darkgreen',    
+            \ 'darkcyan',     
+            \ 'darkred',      
+            \ 'darkmagenta',  
+            \ 'brown',        
             \ 'gray',
             \ 'black',
             \ 'darkmagenta',
