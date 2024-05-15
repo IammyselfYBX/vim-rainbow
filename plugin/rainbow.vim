@@ -5,14 +5,14 @@
 "Author: 贾继伟
 "Last Edited: 1999/09/23
 
-" By default, use rainbow colors copied from gruvbox colorscheme (https://github.com/morhetz/gruvbox).
-" They are generally good for both light and dark colorschemes.
+" 默认使用从gruvbox配色方案复制的彩虹色（https://github.com/morhetz/gruvbox）。
+" 这些颜色通常适用于浅色和深色的配色方案。
 let s:guifgs = exists('g:rainbow_guifgs')? g:rainbow_guifgs : [
-            \ '#458588',
-            \ '#b16286',
-            \ '#cc241d',
-            \ '#d65d0e',
-            \ '#458588',
+            \ '#458588', " 深蓝绿色
+            \ '#b16286', " 浅红色
+            \ '#cc241d', " 深红色
+            \ '#d65d0e', " 橙色
+            \ '#458588', " 重复的颜色，以此类推
             \ '#b16286',
             \ '#cc241d',
             \ '#d65d0e',
@@ -26,15 +26,16 @@ let s:guifgs = exists('g:rainbow_guifgs')? g:rainbow_guifgs : [
             \ '#d65d0e',
             \ ]
 
+" 控制台颜色设置，用于不支持 GUI 的环境。
 let s:ctermfgs = exists('g:rainbow_ctermfgs')? g:rainbow_ctermfgs : [
-            \ 'brown',
-            \ 'Darkblue',
-            \ 'darkgray',
-            \ 'darkgreen',
-            \ 'darkcyan',
-            \ 'darkred',
-            \ 'darkmagenta',
-            \ 'brown',
+            \ 'brown',        " 棕色
+            \ 'Darkblue',     " 深蓝色
+            \ 'darkgray',     " 深灰色
+            \ 'darkgreen',    " 深绿色
+            \ 'darkcyan',     " 深青色
+            \ 'darkred',      " 深红色
+            \ 'darkmagenta',  " 深洋红色
+            \ 'brown',        " 重复的颜色，以此类推
             \ 'gray',
             \ 'black',
             \ 'darkmagenta',
@@ -45,13 +46,17 @@ let s:ctermfgs = exists('g:rainbow_ctermfgs')? g:rainbow_ctermfgs : [
             \ 'red',
             \ ]
 
+" 设置最大层数，取决于是否运行在 GUI 下。
 let s:max = has('gui_running')? len(s:guifgs) : len(s:ctermfgs)
 
+" 主函数，用于加载或重新加载彩虹括号功能。
 func! rainbow#load(...)
+    " 检查是否已加载，若是则清除现有设置。
     if exists('b:loaded')
         cal rainbow#clear()
     endif
 
+    " 根据文件类型定义不同的括号集合。
     if a:0 >= 1
         let b:loaded = a:1
     elseif &ft == 'cpp'
@@ -72,6 +77,7 @@ func! rainbow#load(...)
         let b:loaded = [ ['(', ')'], ['\[', '\]'], ['{', '}'] ]
     endif
 
+    " 设置操作符匹配模式。
     let b:operators = (a:0 < 2) ? '"\v[{\[(<_"''`#*/>)\]}]@![[:punct:]]|\*/@!|/[/*]@!|\<#@!|#@<!\>"' : a:2
 
     if b:operators != ''
@@ -99,7 +105,9 @@ func! rainbow#load(...)
     cal rainbow#activate()
 endfunc
 
+" 清除彩虹括号的函数。
 func! rainbow#clear()
+    " 清除所有彩虹括号相关的语法和高亮设置。
     if exists('b:loaded')
         unlet b:loaded
         exe 'syn clear op_lv0'
@@ -110,6 +118,7 @@ func! rainbow#clear()
     endif
 endfunc
 
+" 激活rainbow函数
 func! rainbow#activate()
     if !exists('b:loaded')
         cal rainbow#load()
@@ -125,6 +134,7 @@ func! rainbow#activate()
     let b:active = 'active'
 endfunc
 
+" 关闭rainbow函数
 func! rainbow#inactivate()
     if exists('b:active')
         exe 'hi clear op_lv0'
@@ -137,6 +147,7 @@ func! rainbow#inactivate()
     endif
 endfunc
 
+" rainbow开关
 func! rainbow#toggle()
     if exists('b:active')
         cal rainbow#inactivate()
@@ -160,5 +171,6 @@ if exists('g:rainbow_active') && g:rainbow_active
     endif
 endif
 
+" 定义插件命令，以便用户可以手动加载或清除彩虹括号。
 command! RainbowToggle call rainbow#toggle()
 command! RainbowLoad call rainbow#load()
